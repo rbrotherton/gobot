@@ -1,0 +1,14 @@
+{
+  "name": "gobot",
+  "version": "1.0.0",
+  "description": "A simple Discord bot",
+  "main": "app.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "rbrotherton@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "request": "^2.87.0"
+  }
+}
