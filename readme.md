@@ -7,14 +7,29 @@ A simple Discord bot written in Node.js.
 * discord.js
 * project dependencies
 
-```
-Give examples
-```
-
 ## Deployment
 
 1. Install Node.
 2. Navigate to project directory
+4. Create a config.json file with the following structure:
+```
+{
+	"prefix": ".",
+	"token": "YOUR DISCORD BOT TOKEN",
+	"apis": {
+		"define" : {
+			"host": "https://od-api.oxforddictionaries.com/api/v1",
+			"app_id": "",
+			"app_key": "",
+			"language": "en"
+		},
+		"weather": {
+			"host": "api.wunderground.com/api",
+			"api_key": ""
+		}
+	}
+}
+```
 3. run `node app.js`
 
 
