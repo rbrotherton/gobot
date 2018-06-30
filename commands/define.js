@@ -11,7 +11,7 @@ module.exports = {
 
     	let word = args[0];
     	let url = `${conf.apis.define.host}/entries/${conf.apis.define.language}/${word.toLowerCase()}`;
-    	console.log(url);
+    	// console.log(url);
 
     	// Create request
 		var request = require('request');

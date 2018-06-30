@@ -3,15 +3,24 @@ module.exports = {
     name: 'weather',
     description: 'Gets current weather for a given zip code.',
     args: true,
-    usage: '<zipcode>',
+    usage: '<zipcode> or <city>, <state>',
     aliases: ['w'],
     cooldown: 3,
     execute(message, args) {
         
-        let zip = args[0];
         let api_key = conf.apis.weather.api_key;
-        let url = `https://${conf.apis.weather.host}/${api_key}/conditions/q/${zip}.json`;
+        let url = `https://${conf.apis.weather.host}/${api_key}/conditions/q/`;
+        if(args.length == 2){
+            let city  = args[0].replace(",", "");
+            let state = args[1].toUpperCase();
+            url += `${state}/${city}.json`;
+        } else {
+            let zip = args[0];
+            url += `${zip}.json`;
+        }
         
+        // console.log("Getting weather: "+ url);
+
         // Configure the request
         var request = require('request');
         var options = {

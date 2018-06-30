@@ -7,6 +7,15 @@ A simple Discord bot written in Node.js.
 * discord.js
 * project dependencies
 
+## Testing
+
+There is a test script so you can test commands locally without hooking into Discord. Just navigate to project directory and call it like so:
+
+`node test weather 46268`
+`node test weather Fresno, CA`
+`node test roll 3d6`
+`node test flip`
+
 ## Deployment
 
 1. Install Node.

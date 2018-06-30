@@ -1,4 +1,5 @@
-const { prefix } = require('../config.json');
+const conf = require('../config.json');
+prefix = conf.prefix;
 module.exports = {
     name: 'help',
     description: 'List all of my commands or info about a specific command.',
