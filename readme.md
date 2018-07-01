@@ -18,7 +18,7 @@ There is a test script so you can test commands locally without hooking into Dis
 
 ## Deployment
 
-1. Install Node.
+1. Install Node (& npm).
 2. Navigate to project directory
 4. Create a config.json file with the following structure:
 ```
@@ -39,7 +39,8 @@ There is a test script so you can test commands locally without hooking into Dis
 	}
 }
 ```
-3. run `node app.js`
+3. run `npm init` to install dependencies
+4. run `node app.js`
 
 
 ## License
