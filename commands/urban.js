@@ -34,17 +34,11 @@ module.exports = {
 			    	let def 	 = list[0].definition;
 			    	let ups 	 = list[0].thumbs_up;
 			    	let downs 	 = list[0].thumbs_down;
-			    	let rating   = Math.round(ups / (ups + downs));
+			    	let rating   = Math.round((ups / (ups + downs) * 100));
+			    	let up 		 = "👍";
 
-			    	try {
-			    		let thumbsup = message.author.client.emojis.find("name", "thumbsup");	
-			    		rating = `(${rating}% ${thumbsup})`;
-			    	} catch (error){
-			    		console.log(error);
-			    		rating = `(${rating}% up)`;;
-			    	}
-					
-			    	message.reply(`**${word}** ${rating}: ${def}`);	
+					rating = `(${rating}% ${up})`;
+			    	message.reply(`**${word}** ${rating}\n${def}`);	
 		    	}
 		    	catch(error) {
 		    		message.reply("There was an error parsing the response.");	
