@@ -64,6 +64,19 @@ module.exports = {
 
             var results = new ResultSet();
 
+            // Limit number of dice to save on memory usage
+            if(pieces.rolls > 200){
+              return "Please limit your rolls to 200 dice to spare my memory.";
+            }
+
+            if(pieces.sides > 100) {
+              return "Please use d100 or smaller to spare my memory.";
+            }
+
+            if(pieces.modifier > 1000000){
+              return "That modifier is ridiculous. Please use something smaller than 1000000." ;
+            }
+
             // rolls
             for (var i = 0; i < pieces.rolls; i++) {
               results.rolls[i] = (1 + Math.floor(Math.random() * pieces.sides));
