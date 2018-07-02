@@ -47,7 +47,10 @@ console.log("Args: "+ args);
 
 // Load command if we find it by name or alias
 const command = commands.get(commandName) || commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
-if (!command) return;
+if (!command) { 
+    console.log("unknown command"); 
+    return;
+}
 	
 // Guild only command?
 if (command.guildOnly && message.channel.type !== 'text') {
