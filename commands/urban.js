@@ -32,10 +32,12 @@ module.exports = {
 		    		let obj 	 = JSON.parse(body);
 			    	let list 	 = obj.list;
 			    	let def 	 = list[0].definition;
-			    	let rating   = Math.round(list[0].thumbs_up / list[0].thumbs_down);
+			    	let ups 	 = list[0].thumbs_up;
+			    	let downs 	 = list[0].thumbs_down;
+			    	let rating   = Math.round(ups / (ups + downs));
 
 			    	try {
-			    		let thumbsup = client.emojis.find("name", "thumbsup");	
+			    		let thumbsup = message.author.client.emojis.find("name", "thumbsup");	
 			    		rating = `(${rating}% ${thumbsup})`;
 			    	} catch (error){
 			    		console.log(error);
