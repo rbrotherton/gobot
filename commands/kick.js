@@ -9,7 +9,18 @@ module.exports = {
 
 		const taggedUser = message.mentions.users.first();
 		if(typeof taggedUser !== 'undefined'){
-			message.reply(`I would kick ${taggedUser.username}, but that would be rude :| `);	
+
+			if(taggedUser.id == 142390439356399616){
+				message.reply(`I would never harm my creator ❤`);
+				return;
+			}
+
+			if(taggedUser.id == 462062772088209419){
+				message.reply(`I can't kick myself 🤖`);
+				return;	
+			}
+
+			message.reply(`Kicking ${taggedUser.username} would be rude 😐`);
 		}
     },
 };
