@@ -21,7 +21,7 @@ let message = {
     client: {commands: commands},
     reply: function(msg){console.log("Output: " + msg)},
     author: {
-    	client: {ping: 5}, 
+    	client: {ping: 5.9999999999}, 
     	username: "Tester",
     	id: "123456",
     	send: function(msg){console.log("DM: " + msg)}
