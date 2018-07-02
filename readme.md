@@ -20,7 +20,7 @@ There is a test script so you can test commands locally without hooking into Dis
 
 1. Install Node (& npm).
 2. Navigate to project directory
-4. Create a config.json file with the following structure:
+3. Create a config.json file in the project root with the following structure:
 ```
 {
 	"prefix": ".",
@@ -39,8 +39,12 @@ There is a test script so you can test commands locally without hooking into Dis
 	}
 }
 ```
-3. run `npm init` to install dependencies
-4. run `node app.js`
+4. Create a cache.json file in the project root with the folowing structure:
+```
+{"zips":{}}
+```
+5. run `npm init` to install dependencies
+6. run `node app.js`
 
 
 ## License
