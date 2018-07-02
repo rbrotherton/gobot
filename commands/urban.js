@@ -38,7 +38,8 @@ module.exports = {
 			    		let thumbsup = client.emojis.find("name", "thumbsup");	
 			    		rating = `(${rating}% ${thumbsup})`;
 			    	} catch (error){
-			    		rating = "";
+			    		console.log(error);
+			    		rating = `(${rating}% up)`;;
 			    	}
 					
 			    	message.reply(`**${word}** ${rating}: ${def}`);	
