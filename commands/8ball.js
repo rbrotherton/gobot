@@ -31,6 +31,7 @@ module.exports = {
             "Very doubtful"
         ]
 
-        message.reply(answers[Math.floor(Math.random() * answers.length)]);
+        let reply = answers[Math.floor(Math.random() * answers.length)];        
+        message.reply("🎱" + " " + reply);
     },
 };

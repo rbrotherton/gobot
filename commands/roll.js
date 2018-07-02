@@ -95,7 +95,7 @@ module.exports = {
         let roller = new DiceRoller();
         let output = roller.roll(input);
         // console.log(output);
-        message.reply(output.toString());
+        message.reply("🎲 " + output.toString());
 
     },
 };

@@ -41,7 +41,7 @@ module.exports = {
 			    	let entry 	 = lexEntry.entries[0];
 			    	let def 	 = entry.senses[0].definitions[0];
 			    	// let notes 	 = entry.senses[0].notes[0];
-			    	message.reply(`**${word}** (${type}): ${def}`);	
+			    	message.reply(`📘 **${word}** (${type}): ${def}`);	
 		    	}
 		    	catch(error) {
 		    		message.reply("There was an error parsing the response.");	

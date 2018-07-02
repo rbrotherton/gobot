@@ -38,7 +38,7 @@ module.exports = {
 			    	let up 		 = "👍";
 
 					rating = `(${rating}% ${up})`;
-			    	message.reply(`**${word}** ${rating}\n${def}`);	
+			    	message.reply(`📕 **${word}** ${rating}\n${def}`);	
 		    	}
 		    	catch(error) {
 		    		message.reply("There was an error parsing the response.");	
