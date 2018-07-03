@@ -4,7 +4,7 @@ module.exports = {
     description: 'Gets a definition from UrbanDicitonary.com',
     args: true,
     usage: '<query>',
-    aliases: ['urb'],
+    aliases: ['urb', 'ud'],
     cooldown: 3,
     execute(message, args) {
     	
