@@ -69,8 +69,9 @@ module.exports = {
                         let cur_temp = current.temperature_string;
                         let feels_like = current.feelslike_string;
                         let cnd = current.weather;
+                        let humid =   current.relative_humidity;
 
-                        message.reply(`**${city}**: ${cur_temp} & ${cnd} | Feels like ${feels_like}`); 
+                        message.reply(`**${city}**: ${cur_temp} & ${cnd} | Feels like ${feels_like} | Humidity: ${humid}`); 
                     }
                     catch(error) {
                         message.reply("There was an error parsing the response.");  
