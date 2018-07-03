@@ -17,18 +17,18 @@ There is a test script so you can test commands locally without hooking into Dis
 * `node test flip`
 
 ## Functions
-* 8ball - Ask the magic 8ball a question
-* coinflip - Flip a coin
-* define - Look up a word in the Oxford dictionary
-* google - Return Google search results for a query
-* help - display help with my commands
-* ping - Classic ping. See if you & the bot can communicate.
-* roll - Roll an assortment of dice (e.g. 3d6+5)
-* server - Display server info
-* urban - Lookup a word on UrbanDictionary.com
-* weather - Lookup the weather for a <zip> or <city, state>.
-* weathersave - Save your <zip> in memory to use weather without parameters
-* youtube - Search for a YouTube video
+* `8ball` - Ask the magic 8ball a question
+* `coinflip` - Flip a coin
+* `define` - Look up a word in the Oxford dictionary
+* `google` - Return Google search results for a query
+* `help` - display help with my commands
+* `ping` - Classic ping. See if you & the bot can communicate.
+* `roll` - Roll an assortment of dice (e.g. 3d6+5)
+* `server` - Display server info
+* `urban` - Lookup a word on UrbanDictionary.com
+* `weather` - Lookup the weather for a <zip> or <city, state>.
+* `weathersave` - Save your <zip> in memory to use weather without parameters
+* `youtube` - Search for a YouTube video
 
 ## Deployment
 
@@ -57,7 +57,7 @@ There is a test script so you can test commands locally without hooking into Dis
 		},
 		"youtube": {
 			"host": "https://www.googleapis.com/youtube/v3",
-			"key": "AIzaSyC6YygcWmzru3AdPpMN6SynctfxLZvffpk"	
+			"key": ""	
 		}
 	}
 }
