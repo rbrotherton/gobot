@@ -1,21 +1,20 @@
 const conf    = require('../config.json');
 const tickers = require('../cache_crypto.json');
-const fs = require('fs');
 
 module.exports = {
     name: 'crypto',
-    description: 'Gets cryptocurrency quotes',
+    description: 'Gets crypto-currency quotes',
     args: true,
-    usage: '<ticker> | populate | top 5',
+    usage: '<ticker> | populate | top <n>',
     aliases: ['c'],
     cooldown: 5,
     execute(message, args) {
 
     	// What to do?
-        if(args[0] == 'populate'){
+        if(args[0] === 'populate'){
         	populateTickerCache(message);
         	return;
-        } else if(args[0] == "top" || args[0] == "big"){
+        } else if(args[0] === "top" || args[0] === "big"){
         	getTop(message, args[1]);
         	return;
         } else {
@@ -24,7 +23,7 @@ module.exports = {
         		var ticker_symbol = arg.toLowerCase();
         		getTicker(message, ticker_symbol);
         	}
-        	return ;
+        	return;
         }
 
         // Get a Ticker value
@@ -97,14 +96,17 @@ module.exports = {
 
 						for (var property in data) {
 						    if (data.hasOwnProperty(property)) {
-
 						    	var t = data[property];
 						    	new_cache[t.symbol.toLowerCase()] = t.id;    
 						    }
 						}
 
-                        fs.writeFile('cache_crypto.json', JSON.stringify(new_cache), 'utf8', function(){});
-                        message.reply(`Ticker cache updated`); 
+						// Write to disk
+						const fs = require('fs');
+                        fs.writeFile('cache_crypto.json', JSON.stringify(new_cache), 'utf8', function(){
+                        	message.reply(`Ticker cache updated`); 
+                        });
+                        
                     }
                     catch(error) {
                     	console.log(error);
@@ -153,7 +155,6 @@ module.exports = {
 						}
 
                         message.reply(`💰 ${response}`); 
-                        message.reply(`Ticker cache updated`); 
                     }
                     catch(error) {
                     	console.log(error);
