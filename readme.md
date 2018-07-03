@@ -50,7 +50,7 @@ There is a test script so you can test commands locally without hooking into Dis
 			"api_key": ""
 		},
 		"google": {
-			"host": "https://www.googleapis.com/customsearch/v1"
+			"host": "https://www.googleapis.com/customsearch/v1",
 			"cx":"",
 			"key":""
 		}
