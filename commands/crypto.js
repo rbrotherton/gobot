@@ -11,27 +11,25 @@ module.exports = {
     cooldown: 5,
     execute(message, args) {
 
-		// Config
-        let key = conf.apis.crypto.key;
-        let url = `${conf.apis.crypto.host}`;
-
+    	// What to do?
         if(args[0] == 'populate'){
         	populateTickerCache(message);
         	return;
-        }
-
-        if(args[0] == "top" || args[0] == "big"){
+        } else if(args[0] == "top" || args[0] == "big"){
         	getTop(message, args[1]);
         	return;
+        } else {
+        	for(i=0; i<args.length; i++){
+        		var arg = args[i];
+        		var ticker_symbol = arg.toLowerCase();
+        		getTicker(message, ticker_symbol);
+        	}
+        	return ;
         }
 
-        // For each ticker requested
-        let results = "";
-        for(i=0; i<args.length; i++){
-
-        	var arg = args[i];
-        	var ticker_symbol = arg.toLowerCase();
-
+        // Get a Ticker value
+        function getTicker(message, ticker_symbol) {
+        	
         	// Can we translate this symbol to an ID?
         	if(tickers.hasOwnProperty(ticker_symbol)){
         		
@@ -40,7 +38,7 @@ module.exports = {
         		// Configure the request
 	            var request = require('request');
 	            var options = {
-	                url: `${url}/ticker/${ticker_id}/`,
+	                url: `${conf.apis.crypto.host}/ticker/${ticker_id}/`,
 	                method: 'GET',
 	                headers: {},
 	            }
@@ -73,9 +71,9 @@ module.exports = {
 	                }
 	            });
 
-	        	} else {
-	        		message.reply("Sorry I don't understand that ticker symbol. Try running `.crypto populate` first.");
-	        	}
+        	} else {
+        		message.reply("Sorry I don't understand that ticker symbol. Try running `.crypto populate` first.");
+        	}
         }
 
         // Populate the Ticker cache
@@ -83,7 +81,7 @@ module.exports = {
 
 			var request = require('request');
             var options = {
-                url: `https://api.coinmarketcap.com/v2/ticker/?limit=25`,
+                url: `${conf.apis.crypto.host}/ticker/?limit=25`,
                 method: 'GET',
                 headers: {},
             }
@@ -121,6 +119,7 @@ module.exports = {
             });
         }
 
+        // Get value of top X tickers
         function getTop(message, n){
 
         	if(n > 10){
@@ -129,7 +128,7 @@ module.exports = {
 
         	var request = require('request');
             var options = {
-                url: `https://api.coinmarketcap.com/v2/ticker/?limit=${n}`,
+                url: `${conf.apis.crypto.host}/ticker/?limit=${n}`,
                 method: 'GET',
                 headers: {},
             }
@@ -158,13 +157,13 @@ module.exports = {
                     }
                     catch(error) {
                     	console.log(error);
-                        message.reply("There was an error parsing the populateTicketCache() response.");  
+                        message.reply("There was an error parsing the getTop() response.");  
                     }
 
                     
                 } else {
                     console.log(body);
-                    message.reply("There was an error populating the ticker cache.");
+                    message.reply("There was an error fetching Top X.");
                 }
             });
         }
