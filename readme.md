@@ -28,6 +28,7 @@ There is a test script so you can test commands locally without hooking into Dis
 * urban - Lookup a word on UrbanDictionary.com
 * weather - Lookup the weather for a <zip> or <city, state>.
 * weathersave - Save your <zip> in memory to use weather without parameters
+* youtube - Search for a YouTube video
 
 ## Deployment
 
