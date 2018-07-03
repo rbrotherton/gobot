@@ -19,6 +19,7 @@ There is a test script so you can test commands locally without hooking into Dis
 ## Functions
 * `8ball` - Ask the magic 8ball a question
 * `coinflip` - Flip a coin
+* `crypto` - Get a crypto currency quote, or several.
 * `define` - Look up a word in the Oxford dictionary
 * `google` - Return Google search results for a query
 * `help` - display help with my commands
@@ -66,8 +67,12 @@ There is a test script so you can test commands locally without hooking into Dis
 ```
 {"zips":{}}
 ```
-5. run `npm init` to install dependencies
-6. run `node app.js`
+5. Create a cache_crypto.json file in the project root with the folowing structure:
+```
+{}
+```
+6. run `npm init` to install dependencies
+7. run `node app.js`
 
 
 ## License
