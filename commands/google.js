@@ -1,3 +1,4 @@
+const conf = require('../config.json');
 module.exports = {
     name: 'google',
     description: 'Fetch the first result of a Google query',
@@ -8,27 +9,41 @@ module.exports = {
     execute(message, args) {
 
     	let query = args.join(' ');
-    	var google = require('google')
+    	let url = `${conf.apis.google.host}?key=${conf.apis.google.key}&cx=${conf.apis.google.cx}&q=${query}`;
+    	console.log(url);
 
-		google.resultsPerPage = 10
-		var nextCounter = 0
+    	// Create request
+		var request = require('request');
 
-		google(query, function (err, res){
-		  if (err) {
-		  	console.error(err);
-		  	message.reply("There was an error fetching the results.");
-		  } else {
-		  	try {
-		  		var link = res.links[0];
-				let result = `🤖 **${link.title}** (${link.link})\n\`\`\`${link.description}\`\`\` `;
-				message.reply(result);	
-		  	} catch(error) {
-		  		console.log(error);
-		  		message.reply("There was an error parsing the results.");
-		  	}
-		  	
-		  }
-		    
+		// Configure the request
+		var options = {
+		    url: url,
+		    method: 'GET',
+		    headers: {},
+		}
+
+		// Start the request
+		request(options, function (error, response, body) {
+		    if (!error && response.statusCode == 200) {
+
+		    	try {
+		    		let obj 	 = JSON.parse(body);
+			    	let item 	 = obj.items[0];
+			    	let title 	 = item.title;
+			    	let link 	 = item.link;
+			    	let snippet	 = item.snippet;
+
+			    	message.reply(`🤖 **${title}** (${link})\n${snippet}`);	
+		    	}
+		    	catch(error) {
+		    		message.reply("There was an error parsing the response.");	
+		    	}
+
+		        
+		    } else {
+		    	// TODO Better errors
+		    	message.reply("There was an error looking up that word.");
+		    }
 		})
     },
 };

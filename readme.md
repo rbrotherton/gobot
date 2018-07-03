@@ -11,10 +11,23 @@ A simple Discord bot written in Node.js.
 
 There is a test script so you can test commands locally without hooking into Discord. Just navigate to project directory and call it like so:
 
-`node test weather 46268`
-`node test weather Fresno, CA`
-`node test roll 3d6`
-`node test flip`
+* `node test weather 46268`
+* `node test weather Fresno, CA`
+* `node test roll 3d6`
+* `node test flip`
+
+## Functions
+* 8ball - Ask the magic 8ball a question
+* coinflip - Flip a coin
+* define - Look up a word in the Oxford dictionary
+* google - Return Google search results for a query
+* help - display help with my commands
+* ping - Classic ping. See if you & the bot can communicate.
+* roll - Roll an assortment of dice (e.g. 3d6+5)
+* server - Display server info
+* urban - Lookup a word on UrbanDictionary.com
+* weather - Lookup the weather for a <zip> or <city, state>.
+* weathersave - Save your <zip> in memory to use weather without parameters
 
 ## Deployment
 
@@ -35,6 +48,11 @@ There is a test script so you can test commands locally without hooking into Dis
 		"weather": {
 			"host": "api.wunderground.com/api",
 			"api_key": ""
+		},
+		"google": {
+			"host": "https://www.googleapis.com/customsearch/v1"
+			"cx":"",
+			"key":""
 		}
 	}
 }
