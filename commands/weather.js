@@ -50,8 +50,7 @@ module.exports = {
             var options = {
                 url: url,
                 method: 'GET',
-                headers: {},
-                // qs: {'': 'xxx', 'key2': 'yyy'}
+                headers: {}
             }
 
             // Start the request
@@ -60,16 +59,21 @@ module.exports = {
 
                     try {
                         
-                        let obj = JSON.parse(body);
+                        let obj     = JSON.parse(body);
                         let current = obj.current_observation
-                        let loc = current.display_location;
-                        let city = loc.full;
+                        let loc     = current.display_location;
+                        let city    = loc.full;
 
                         // Misc
-                        let cur_temp = current.temperature_string;
+                        let cur_temp   = current.temperature_string;
                         let feels_like = current.feelslike_string;
-                        let cnd = current.weather;
-                        let humid =   current.relative_humidity;
+                        let cnd        = current.weather;
+                        let humid      = current.relative_humidity;
+
+                        // Format feels like
+                        feels_like = feels_like.replace(" (", "** *(");
+                        feels_like = feels_like.replace(")", ")*");
+                        feels_like = "**"+feels_like;
 
                         message.reply(`**${city}**: ${cur_temp} & ${cnd} | Feels like ${feels_like} | Humidity: ${humid}`); 
                     }
