@@ -16,7 +16,7 @@ module.exports = {
 		google(query, function (err, res){
 		  if (err) {
 		  	console.error(err);
-		  	messager.reply("There was an error fetching the results.");
+		  	message.reply("There was an error fetching the results.");
 		  } else {
 		  	try {
 		  		var link = res.links[0];
@@ -24,7 +24,7 @@ module.exports = {
 				message.reply(result);	
 		  	} catch(error) {
 		  		console.log(error);
-		  		messager.reply("There was an error parsing the results.");
+		  		message.reply("There was an error parsing the results.");
 		  	}
 		  	
 		  }
