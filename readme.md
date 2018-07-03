@@ -53,6 +53,10 @@ There is a test script so you can test commands locally without hooking into Dis
 			"host": "https://www.googleapis.com/customsearch/v1",
 			"cx":"",
 			"key":""
+		},
+		"youtube": {
+			"host": "https://www.googleapis.com/youtube/v3",
+			"key": "AIzaSyC6YygcWmzru3AdPpMN6SynctfxLZvffpk"	
 		}
 	}
 }
