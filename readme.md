@@ -26,9 +26,10 @@ There is a test script so you can test commands locally without hooking into Dis
 * `ping` - Classic ping. See if you & the bot can communicate.
 * `roll` - Roll an assortment of dice (e.g. 3d6+5)
 * `server` - Display server info
+* `topic` - Set the topic of the channel
 * `urban` - Lookup a word on UrbanDictionary.com
-* `weather` - Lookup the weather for a <zip> or <city, state>.
-* `weathersave` - Save your <zip> in memory to use weather without parameters
+* `weather` - Lookup the weather for a <zip code> or <city, state>.
+* `weathersave` - Save your <zip code> in memory to use weather without parameters
 * `youtube` - Search for a YouTube video
 
 ## Deployment
@@ -59,7 +60,11 @@ There is a test script so you can test commands locally without hooking into Dis
 		"youtube": {
 			"host": "https://www.googleapis.com/youtube/v3",
 			"key": ""	
-		}
+		},
+        "crypto": {
+            "host": "https://api.coinmarketcap.com/v2"
+        }
+
 	}
 }
 ```

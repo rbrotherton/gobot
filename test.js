@@ -16,7 +16,8 @@ for (const file of commandFiles) {
 let message = {
     channel: {
     	type: "text",
-    	send: function(msg){console.log("Output: "+ msg)}
+    	send: function(msg){console.log("Output: "+ msg)},
+        setTopic: function(msg){console.log("Setting topic to: "+msg)}
     },
     client: {commands: commands},
     reply: function(msg){console.log("Output: " + msg)},
