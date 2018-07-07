@@ -89,5 +89,66 @@ module.exports = {
                 }
             });
         }
+
+        // Get an icon to represent a given condition
+        function getIcon(condition) {
+
+            // Rain/storm icons
+            var icon_cloud_rain = 🌧;
+            var icon_thunder_cloud_rain = ⛈;
+            var icon_sun_rain_cloud = 🌦;
+            var icon_lightning = 🌩;
+
+            // Snow/ice
+            var icon_snowing = 🌨;
+            var icon_snowflake = ❄;
+
+            // Cloudy
+            var icon_overcast = ☁;
+            var icon_cloudy = 🌥;
+            var icon_light_clouds = 🌤;
+
+            // Sun
+            var icon_sun = ☀;
+
+            // Fog
+            var icon_fog = 🌁;
+
+            // Map condition keywrods to an emoji
+            var conditions = [
+                {"name": 'drizzle', "icon": icon_cloud_rain},
+                {"name": 'showers', "icon": icon_sun_rain_cloud},
+                {"name": 'rain',    "icon": icon_cloud_rain},
+                {"name": 'spray',   "icon": icon_cloud_rain},
+                {"name": 'snow',    "icon": icon_snowing},
+                {"name": 'ice',     "icon": icon_snowflake},
+                {"name": 'hail',    "icon": icon_snowflake},
+                {"name": 'mist',    "icon": icon_fog},
+                {"name": 'fog',     "icon": icon_fog},
+                {"name": 'smoke',   "icon": icon_fog},
+                {"name": 'volcanic',"icon": icon_fog},
+                {"name": 'dust',    "icon": icon_fog},
+                {"name": 'sand',    "icon": icon_fog},
+                {"name": 'haze',    "icon": icon_fog},
+                {"name": 'thunder', "icon": icon_thunder_cloud_rain},
+                {"name": 'overcast',"icon": icon_overcast},
+                {"name": 'clear',   "icon": icon_sun},
+                {"name": 'sunny',   "icon": icon_sun},
+                {"name": 'cloud',   "icon": icon_cloudy}
+            ];
+
+            // For each condition keyword, see if condition contains it
+            let result   = icon_sun;
+            var haystack = condition.toLowerCase();
+            condition.forEach(function(condition_entry, haystack){
+                var needle = condition_entry.name.toLowerCase();
+                if(haystack.includes(needle)){
+                    result = condition_entry.icon;
+                }
+            });
+
+            return result;
+
+        }
     },
 };
