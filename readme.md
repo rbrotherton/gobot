@@ -29,7 +29,7 @@ There is a test script so you can test commands locally without hooking into Dis
 * `topic` - Set the topic of the channel
 * `urban` - Lookup a word on UrbanDictionary.com
 * `weather` - Lookup the weather for a ZIP or CITY, STATE.
-* `weatherforecast` - Lookup the weather for a ZIP or CITY, STATE.
+* `weatherforecast` - Lookup the weather forecast for a ZIP or CITY, STATE.
 * `weathersave` - Save your ZIP in memory to use weather commands without parameters
 * `youtube` - Search for a YouTube video
 
