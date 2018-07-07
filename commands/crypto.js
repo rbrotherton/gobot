@@ -150,7 +150,7 @@ module.exports = {
 						    	var t 	   = data[property];
 						    	var price  = t.quotes.USD.price.toFixed(2);
 						    	var change = t.quotes.USD.percent_change_24h.toFixed(2);
-						    	response  += ` **${t.symbol}**: \$${price} (${change}% 24h) |`
+						    	response  += `\n **${t.symbol}**: \$${price} (${change}% 24h) `
 						    }
 						}
 
