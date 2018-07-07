@@ -2,16 +2,16 @@ const conf = require('../config.json');
 fs = require('fs');
 
 module.exports = {
-    name: 'weather',
-    description: 'Gets current weather for a given zip code.',
+    name: 'weatherforecast',
+    description: 'Gets weather forecast',
     args: false,
     usage: '<zipcode> or <city>, <state>',
-    aliases: ['w'],
+    aliases: ['wf'],
     cooldown: 3,
     execute(message, args) {
         
         let api_key = conf.apis.weather.api_key;
-        let url = `https://${conf.apis.weather.host}/${api_key}/conditions/q/`;
+        let url = `https://${conf.apis.weather.host}/${api_key}/forecast/q/`;
         if(args.length == 2){ // User passed in city, state
             let city  = args[0].replace(",", "");
             let state = args[1].toUpperCase();
@@ -57,39 +57,20 @@ module.exports = {
 
                     try {
                         
-                        let obj     = JSON.parse(body);
-                        let current = obj.current_observation
-                        let loc     = current.display_location;
-                        let city    = loc.full;
+                        let obj  = JSON.parse(body);
+                        let fc   = obj.forecast.simpleforecast;
+                        let fctx = obj.forecast.txt_forecast;
 
-                        // Misc
-                        let cur_temp   = current.temperature_string;
-                        let feels_like = current.feelslike_string;
-                        let cnd        = current.weather;
-                        let humid      = current.relative_humidity;
-                        let temp_f     = current.temp_f;
-                        let feels_f    = current.feelslike_f;
+                        let result = "";
 
-                        // Format feels like
-                        feels_like = feels_like.replace(" (", "** *(");
-                        feels_like = feels_like.replace(")", ")*");
-                        feels_like = "**"+feels_like;
-
-                        // Really hot or cold?
-                        var icon_fire = `🔥`;
-                        var icon_ice = `❄`;
-                        if(feels_f >= 100){
-                            feels_like = `${icon_fire} ${feels_like}`;
-                        }
-
-                        if(feels_f <= 32){
-                            feels_like = `${icon_ice} ${feels_like}`;   
-                        }
-
-                        let cnd_icon = getIcon(cnd);
-
+                        fctx.forecastday.forEach(function(day){
+                        	if(day.title.indexOf("Night") == -1){ // Ignore 'Night' entries
+                        		result += `\n **${day.title}**: ${day.fcttext}`;
+                        	}
+                        });
+                        message.reply(result);
                         // Create response
-                        message.reply(`**${city}**: ${cur_temp} and feels like ${feels_like} | Humidity: ${humid} | ${cnd_icon} ${cnd}`); 
+                        // message.reply(`**${city}**: ${cur_temp} and feels like ${feels_like} | Humidity: ${humid} | ${cnd_icon} ${cnd}`); 
                     }
                     catch(error) {
                         console.log(error);
