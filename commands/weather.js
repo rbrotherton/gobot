@@ -69,15 +69,32 @@ module.exports = {
                         let feels_like = current.feelslike_string;
                         let cnd        = current.weather;
                         let humid      = current.relative_humidity;
+                        let temp_f     = current.temp_f;
+                        let feels_f    = current.feelslike_f;
 
                         // Format feels like
                         feels_like = feels_like.replace(" (", "** *(");
                         feels_like = feels_like.replace(")", ")*");
                         feels_like = "**"+feels_like;
 
-                        message.reply(`**${city}**: ${cur_temp} & ${cnd} | Feels like ${feels_like} | Humidity: ${humid}`); 
+                        // Really hot or cold?
+                        var icon_fire = `🔥`;
+                        var icon_ice = `❄`;
+                        if(feels_f >= 100){
+                            feels_like = `${icon_fire} ${feels_like}`;
+                        }
+
+                        if(feels_f <= 32){
+                            feels_like = `${icon_ice} ${feels_like}`;   
+                        }
+
+                        let cnd_icon = getIcon(cnd);
+
+                        // Create response
+                        message.reply(`**${city}**: ${cur_temp} and feels like ${feels_like} | Humidity: ${humid} | ${cnd_icon} ${cnd}`); 
                     }
                     catch(error) {
+                        console.log(error);
                         message.reply("There was an error parsing the response.");  
                     }
 
@@ -94,25 +111,25 @@ module.exports = {
         function getIcon(condition) {
 
             // Rain/storm icons
-            var icon_cloud_rain = 🌧;
-            var icon_thunder_cloud_rain = ⛈;
-            var icon_sun_rain_cloud = 🌦;
-            var icon_lightning = 🌩;
+            var icon_cloud_rain = `🌧`;
+            var icon_thunder_cloud_rain = `⛈`;
+            var icon_sun_rain_cloud = `🌦`;
+            var icon_lightning = `🌩`;
 
             // Snow/ice
-            var icon_snowing = 🌨;
-            var icon_snowflake = ❄;
+            var icon_snowing = `🌨`;
+            var icon_snowflake = `❄`;
 
             // Cloudy
-            var icon_overcast = ☁;
-            var icon_cloudy = 🌥;
-            var icon_light_clouds = 🌤;
+            var icon_overcast = `☁`;
+            var icon_cloudy = `🌥`;
+            var icon_light_clouds = `🌤`;
 
             // Sun
-            var icon_sun = ☀;
+            var icon_sun = `☀`;
 
             // Fog
-            var icon_fog = 🌁;
+            var icon_fog = `🌁`;
 
             // Map condition keywrods to an emoji
             var conditions = [
@@ -139,10 +156,10 @@ module.exports = {
 
             // For each condition keyword, see if condition contains it
             let result   = icon_sun;
-            var haystack = condition.toLowerCase();
-            condition.forEach(function(condition_entry, haystack){
+            let haystack = condition.toString().toLowerCase();
+            conditions.forEach(function(condition_entry){
                 var needle = condition_entry.name.toLowerCase();
-                if(haystack.includes(needle)){
+                if(haystack.indexOf(needle) !== -1){
                     result = condition_entry.icon;
                 }
             });
