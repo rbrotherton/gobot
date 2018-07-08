@@ -23,6 +23,8 @@ let user = {
 // Create mentions
 const mentions = new Discord.Collection();
 mentions.set(user.id, user);
+mentions.users = new Discord.Collection();
+mentions.users.set(user.id, user);
 
 let message = {
     channel: {
