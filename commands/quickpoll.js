@@ -12,7 +12,8 @@ module.exports = {
 
         // Create poll
         let question = args.join(' ');
-        let poll = `**Poll:** ${question}  *(By ${message.author.username})*`;
+        let name = getAuthorNick(message);
+        let poll = `**Poll:** ${question}  *(By ${name})*`;
         message.channel.send(poll)
         	.then(function(new_msg){
         		new_msg.react(`👍`);
@@ -21,5 +22,18 @@ module.exports = {
         	})
         	.catch(error => console.log(error))
         
+
+        function getAuthorNick(message){
+        	let guild  = message.guild;
+        	let member = guild.members.get(message.author.id);
+        	let nick   = member.nickname;
+
+        	if(nick !== null){
+        		return nick;
+        	} else {
+        		return message.author.username;
+        	}
+
+        }
     },
 };
