@@ -28,18 +28,22 @@ module.exports = {
 	                console.log(err);
 	                message.reply("Cache failure. Please try again.");
 	            } else {
+	            	// get existing user quotes
 	                obj = JSON.parse(data);
 	                let user_id = message.mentions.users.first().id;
 	                let quotes = obj.quotes;
 	                let user_quotes = quotes[user_id];
-	                
+
 	                if(typeof user_quotes == "undefined"){
 	                	user_quotes = [];
 	                }
 
+	                // Add a new quote to the array
 	                let stamp = Math.floor(new Date() / 1000);
 	                user_quotes.push({"stamp":stamp, "quote":quote});
-	                obj.quotes.user_id = user_quotes;
+	                obj.quotes[user_id] = user_quotes;
+
+	                // Save array back to cache
 	                json = JSON.stringify(obj);
 	                fs.writeFile('cache.json', json, 'utf8', function(){
 	                    message.reply("Quote saved.");
@@ -55,7 +59,7 @@ module.exports = {
 	                message.reply("Cache failure. Please try again.");
 	            } else {
 	                
-	                let user_id = message.mentions.users.first().id.toString();
+	                let user_id = message.mentions.users.first().id;
 	                let quotes = cache.quotes;
 
 	                if(quotes.hasOwnProperty(user_id)){
