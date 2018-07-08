@@ -59,8 +59,12 @@ module.exports = {
 	                message.reply("Cache failure. Please try again.");
 	            } else {
 	                
+	                obj = JSON.parse(data);
 	                let user_id = message.mentions.users.first().id;
-	                let quotes = cache.quotes;
+	                let quotes = obj.quotes;
+
+	                console.log(quotes);
+	                console.log(user_id);
 
 	                if(quotes.hasOwnProperty(user_id)){
 	                    let user_quotes = quotes[user_id];

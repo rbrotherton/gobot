@@ -16,7 +16,7 @@ for (const file of commandFiles) {
 let user = {
     client: {ping: 5.9999999999}, 
     username: "Tester",
-    id: 123456,
+    id: 142390439356399616,
     send: function(msg){console.log("DM: " + msg)}
 };
 
