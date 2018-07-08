@@ -13,6 +13,17 @@ for (const file of commandFiles) {
 }
 
 // Fake a Message class for ease of integration
+let user = {
+    client: {ping: 5.9999999999}, 
+    username: "Tester",
+    id: 123456,
+    send: function(msg){console.log("DM: " + msg)}
+};
+
+// Create mentions
+const mentions = new Discord.Collection();
+mentions.set(user.id, user);
+
 let message = {
     channel: {
     	type: "text",
@@ -23,17 +34,13 @@ let message = {
     reply: function(msg){console.log("Output: " + msg)},
     delete: function(){console.log('Message deleted')},
     react: function(msg){console.log(`Reacted ${msg} to message`)},
-    author: {
-    	client: {ping: 5.9999999999}, 
-    	username: "Tester",
-    	id: "123456",
-    	send: function(msg){console.log("DM: " + msg)}
-    },
+    author: user,
     guild: {
     	name: "Test Guild",
     	memberCount: 1,
         fetchAuditLogs: function(){return [{}];}
-    }
+    },
+    mentions: mentions
 }
 
 // Get args
