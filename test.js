@@ -21,6 +21,8 @@ let message = {
     },
     client: {commands: commands},
     reply: function(msg){console.log("Output: " + msg)},
+    delete: function(){console.log('Message deleted')},
+    react: function(msg){console.log(`Reacted ${msg} to message`)},
     author: {
     	client: {ping: 5.9999999999}, 
     	username: "Tester",
@@ -29,7 +31,8 @@ let message = {
     },
     guild: {
     	name: "Test Guild",
-    	memberCount: 1
+    	memberCount: 1,
+        fetchAuditLogs: function(){return [{}];}
     }
 }
 

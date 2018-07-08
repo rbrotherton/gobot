@@ -24,6 +24,7 @@ There is a test script so you can test commands locally without hooking into Dis
 * `google` - Return Google search results for a query
 * `help` - display help with my commands
 * `ping` - Classic ping. See if you & the bot can communicate.
+* `quickpoll` - Create a yes/no poll.
 * `roll` - Roll an assortment of dice (e.g. 3d6+5)
 * `server` - Display server info
 * `topic` - Set the topic of the channel
