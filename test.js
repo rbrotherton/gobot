@@ -28,6 +28,7 @@ mentions.users.set(user.id, user);
 
 let message = {
     channel: {
+        id: 222222,
     	type: "text",
     	send: function(msg){console.log("Output: "+ msg)},
         setTopic: function(msg){console.log("Setting topic to: "+msg)}
@@ -38,6 +39,7 @@ let message = {
     react: function(msg){console.log(`Reacted ${msg} to message`)},
     author: user,
     guild: {
+        id: 111111,
     	name: "Test Guild",
     	memberCount: 1,
         fetchAuditLogs: function(){return [{}];}
