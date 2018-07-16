@@ -10,7 +10,7 @@ module.exports = {
     	
     	// http://api.urbandictionary.com/v0/define?term=hood
 
-    	let word = args[0];
+    	let word = args.join(' ');
     	let url = `https://api.urbandictionary.com/v0/define?term=${word}`;
     	console.log(url);
 
