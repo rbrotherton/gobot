@@ -1,7 +1,7 @@
 const conf = require('../config.json');
 module.exports = {
     name: 'youtube',
-    description: 'Fetch the first result of a Google query',
+    description: 'Fetch the first result of a YouTube query',
     args: true,
     usage: '<query>',
     aliases: ['yt'],
