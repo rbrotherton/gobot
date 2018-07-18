@@ -12,11 +12,23 @@ module.exports = {
         
         let api_key = conf.apis.weather.api_key;
         let url = `https://${conf.apis.weather.host}/${api_key}/conditions/q/`;
-        if(args.length == 2){ // User passed in city, state
-            let city  = args[0].replace(",", "");
-            let state = args[1].toUpperCase();
+        if(args.length > 1){ // User passed in a location by name
+
+            // Get City
+            var city = "";
+            if(args.length > 2){
+                city = `${args[0]} ${args[1].replace(",", "")}`;    
+            } else {
+                city = args[0].replace(",", "");
+            }
+
+            // Get state
+            let state = args[(args.length - 1)].toUpperCase();
+
+            // Send request
             url += `${state}/${city}.json`;
             getWeather(url);
+
         } else if(args.length == 1) { // User passed in a zip code
             let zip = args[0];
             url += `${zip}.json`;
