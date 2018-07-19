@@ -40,6 +40,7 @@ The bot will need the following permissions
 * `roll` - Roll an assortment of dice (e.g. 3d6+5)
 * `server` - Display server info
 * `topic` - Set the topic of the channel
+* `twitter` - Get the latest Tweet from a given Twitter user
 * `urban` - Lookup a word on UrbanDictionary.com
 * `weather` - Lookup the weather for a ZIP or CITY, STATE.
 * `weatherforecast` - Lookup the weather forecast for a ZIP or CITY, STATE.
@@ -78,8 +79,11 @@ The bot will need the following permissions
 		},
         "crypto": {
             "host": "https://api.coinmarketcap.com/v2"
-        }
-
+        },
+		"twitter": {
+			"consumer_key": "",
+			"consumer_secret": ""
+		}
 	}
 }
 ```
