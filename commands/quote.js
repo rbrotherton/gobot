@@ -8,6 +8,7 @@ module.exports = {
     args: true,
     usage: '@user or @user <quote to store>',
     aliases: ['q'],
+    prodOnly: true,
     cooldown: 1,
     execute(message, args) {
         

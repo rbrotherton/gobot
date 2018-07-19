@@ -16,6 +16,16 @@ There is a test script so you can test commands locally without hooking into Dis
 * `node test roll 3d6`
 * `node test flip`
 
+## Permissions
+
+The bot will need the following permissions
+
+ * Send Messages (duh)
+ * Read Text Channels (duh)
+ * Manage Channel (To user .topic)
+ * Manage Roles (To use .role)
+ * Manage Messages (To use .quickpoll)
+
 ## Functions
 * `8ball` - Ask the magic 8ball a question
 * `coinflip` - Flip a coin
@@ -26,6 +36,7 @@ There is a test script so you can test commands locally without hooking into Dis
 * `ping` - Classic ping. See if you & the bot can communicate.
 * `quickpoll` - Create a yes/no poll.
 * `quote` - Save/recall quotes form users.
+* `role` - Give yourself roles, or remove them.
 * `roll` - Roll an assortment of dice (e.g. 3d6+5)
 * `server` - Display server info
 * `topic` - Set the topic of the channel
@@ -44,6 +55,7 @@ There is a test script so you can test commands locally without hooking into Dis
 {
 	"prefix": ".",
 	"token": "YOUR DISCORD BOT TOKEN",
+	"environment": "production",
 	"apis": {
 		"define" : {
 			"host": "https://od-api.oxforddictionaries.com/api/v1",

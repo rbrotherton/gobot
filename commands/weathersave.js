@@ -7,9 +7,10 @@ module.exports = {
     args: true,
     usage: '<zipcode>',
     aliases: ['ws'],
+    prodOnly: true,
     cooldown: 1,
     execute(message, args) {
-        
+
         let zip = args[0];
 
         // Get cache

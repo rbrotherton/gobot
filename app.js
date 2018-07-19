@@ -5,7 +5,9 @@ const fs = require('fs');
 const Discord = require('discord.js');
 
 // Load config
-const { prefix, token } = require('./config.json');
+const conf   = require('./config.json');
+const prefix = conf.prefix;
+const token  = conf.token;
 
 // Create a new Discord client
 const client = new Discord.Client();
@@ -44,6 +46,12 @@ client.on('message', message => {
 	if (command.guildOnly && message.channel.type !== 'text') {
 	    return message.reply('I can\'t execute that command inside DMs!');
 	}
+
+	// Production only commend?
+	if(conf.environment != "production" && command.prodOnly == true){
+        message.reply("I'm currently running in development mode and cannot execute that command. Sorry!");
+        return;
+    }
 
 	// Command requires args?
 	if (command.args && !args.length) {
