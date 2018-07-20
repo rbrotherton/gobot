@@ -106,4 +106,9 @@ client.on('message', message => {
 });
 
 // Login to Discord
-client.login(token);
+try {
+	client.login(token);
+}
+catch (error) {
+    console.error("CLIENT.LOGIN FAILURE:", error);
+}	
