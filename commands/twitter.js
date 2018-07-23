@@ -4,13 +4,28 @@ module.exports = {
     name: 'twitter',
     description: 'Fetch the latest tweet from a given user',
     args: true,
-    usage: '<twitter screen name>',
+    usage: '<twitter screen name> <number of recent tweets to load>',
     aliases: ['t'],
     cooldown: 5,
     execute(message, args) {
 
     	// Get user input
+    	let count = 1;
     	let user = args[0].replace('@', '');
+
+    	if(args.length > 1){
+    		count = parseInt(args[1]);
+    	}
+
+    	// Sanity checks
+    	if(count > 10){
+    		count = 10;
+    	}
+
+    	if(user.length < 3){
+    		message.reply("That doesn't appear to be a valid twitter husername");
+    		return;
+    	}
 
 		// Init Twit
 		let twit = new Twit({
@@ -22,7 +37,7 @@ module.exports = {
 		});
 
 		// Get data
-		twit.get('statuses/user_timeline', {'screen_name': user, 'count': 1})
+		twit.get('statuses/user_timeline', {'screen_name': user, 'count': count, 'tweet_mode': 'extended'})
 			.catch(function (error) {
 		    	console.log(error);
                 message.reply("🤖 There was an error parsing the response.");  
@@ -33,16 +48,18 @@ module.exports = {
 		    	// See https://github.com/ttezel/twit#tgetpath-params-callback for details.
 		    	// console.log('data', result.data);
 
-		    	let tweets 		= result.data;
-		    	let tweet 		= tweets[0];
-		    	let real_name 	= tweet.user.name;
-		    	let screen_name = tweet.user.screen_name;
-		    	let tweet_text  = tweet.text;
-		    	let tweet_link  = `https://twitter.com/${screen_name}/status/${tweet.id_str}`;
+		    	result.data.forEach(function(tweet){
 
-		    	let response = `${real_name} (@${screen_name}): ${tweet_text}`;
+		    		let real_name 	= tweet.user.name;
+		    		let screen_name = tweet.user.screen_name;
+		    		// let tweet_text  = tweet.text; // Non-extended
+		    		let tweet_text  = tweet.full_text; // Extended
+		    		let tweet_link  = `https://twitter.com/${screen_name}/status/${tweet.id_str}`;
+		    		let response = `${real_name} (@${screen_name}): ${tweet_text}`;
 
-		    	message.reply(`🐦 ${response}`);  
+		    		message.reply(`🐦 ${response}`);  
+		    	});
+		    	
 
 		  	})
 
