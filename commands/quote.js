@@ -6,7 +6,7 @@ module.exports = {
     name: 'quote',
     description: 'Stores & retrieves quotes for users',
     args: true,
-    usage: '<@user | @user "quote to store" | stats>',
+    usage: '<@user | @user "quote to store" | stats | random>',
     aliases: ['q'],
     prodOnly: true,
     cooldown: 1,
