@@ -95,7 +95,7 @@ The bot will need the following permissions
 ```
 {}
 ```
-6. run `npm init` to install dependencies
+6. run `npm install` to install dependencies
 7. run `node app.js`
 
 
