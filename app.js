@@ -26,6 +26,12 @@ const cooldowns = new Discord.Collection();
 // On client ready, report status
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
+  client.user.setPresence({
+	  game: {
+	    name: `${prefix}help`,
+	    type: "LISTENING",
+	  },
+	}).then(console.log("Status set")).catch(err => console.log(err));
 });
 
 // Handle inbound messages
