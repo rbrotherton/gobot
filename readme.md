@@ -22,7 +22,7 @@ The bot will need the following permissions
 
  * Send Messages (duh)
  * Read Text Channels (duh)
- * Manage Channel (To user .topic)
+ * Manage Channel (To use .topic)
  * Manage Roles (To use .role)
  * Manage Messages (To use .quickpoll)
 
