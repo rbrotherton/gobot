@@ -82,6 +82,10 @@ The bot will need the following permissions
         "crypto": {
             "host": "https://api.coinmarketcap.com/v2"
         },
+        "stocks": {
+			"host": "https://www.alphavantage.co",
+			"key": ""
+		},
 		"twitter": {
 			"consumer_key": "",
 			"consumer_secret": ""
