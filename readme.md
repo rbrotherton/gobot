@@ -36,6 +36,7 @@ The bot will need the following permissions
 * `ping` - Classic ping. See if you & the bot can communicate.
 * `quickpoll` - Create a yes/no poll.
 * `quote` - Save/recall quotes form users.
+* `repo` - Outputs a link to the bot's source code.
 * `role` - Give yourself roles, or remove them.
 * `roll` - Roll an assortment of dice (e.g. 3d6+5)
 * `server` - Display server info
@@ -59,6 +60,7 @@ The bot will need the following permissions
 	"prefix": ".",
 	"token": "YOUR DISCORD BOT TOKEN",
 	"environment": "production",
+	"repo": "https://github.com/rbrotherton/gobot",
 	"apis": {
 		"define" : {
 			"host": "https://od-api.oxforddictionaries.com/api/v1",
