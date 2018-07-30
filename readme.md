@@ -33,6 +33,7 @@ The bot will need the following permissions
 * `define` - Look up a word in the Oxford dictionary
 * `google` - Return Google search results for a query
 * `help` - display help with my commands
+* `news` - get top world news or search keyword news articles.
 * `ping` - Classic ping. See if you & the bot can communicate.
 * `quickpoll` - Create a yes/no poll.
 * `quote` - Save/recall quotes form users.
@@ -91,6 +92,11 @@ The bot will need the following permissions
 		"twitter": {
 			"consumer_key": "",
 			"consumer_secret": ""
+		},
+		"news": {
+			"key": "",
+			"host": "https://newsapi.org/v2/",
+			"country": "us"
 		}
 	}
 }
@@ -110,4 +116,8 @@ The bot will need the following permissions
 ## License
 
 This project is licensed under the MIT License
+
+## Atribution
+
+Thanks to [NewsAPI.org](https://newsapi.org) for providing a free news API!
 

@@ -42,7 +42,7 @@ module.exports = {
 		        
 		    } else {
 		    	// TODO Better errors
-		    	message.reply("There was an error looking up that word.");
+		    	message.reply("There was an error performing your search.");
 		    }
 		})
     },
