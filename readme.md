@@ -96,7 +96,8 @@ The bot will need the following permissions
 		"news": {
 			"key": "",
 			"host": "https://newsapi.org/v2/",
-			"country": "us"
+			"country": "us",
+			"language": "en"
 		}
 	}
 }
