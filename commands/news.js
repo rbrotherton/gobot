@@ -26,19 +26,10 @@ module.exports = {
     		url = `${conf.apis.news.host}/top-headlines?pageSize=${limit}&apiKey=${conf.apis.news.key}&country=${conf.apis.news.country}`;	
     	} else { // Search
 
-    		if(args.length > 1 && isNumber(args[1])){
-				limit = parseInt(args[1]);
-
-				if(limit > 3){
-					message.reply("Please use a number smaller than 4");
-					return;
-				}
-
-			}
-
 			let oldest_date = getOldestDate();
+			let query = args.join(" ");
 
-			url = `${conf.apis.news.host}/everything?q=${args[0]}&pageSize=${limit}&language=${conf.apis.news.language}&from=${oldest_date}&sortBy=publishedAt&apiKey=${conf.apis.news.key}`;	
+			url = `${conf.apis.news.host}/everything?q=${query}&pageSize=${limit}&language=${conf.apis.news.language}&from=${oldest_date}&sortBy=publishedAt&apiKey=${conf.apis.news.key}`;	
     	}
 console.log(url);
     	// Create request
