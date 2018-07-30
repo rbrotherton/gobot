@@ -82,10 +82,10 @@ The bot will need the following permissions
 			"host": "https://www.googleapis.com/youtube/v3",
 			"key": ""	
 		},
-        "crypto": {
-            "host": "https://api.coinmarketcap.com/v2"
-        },
-        "stocks": {
+		"crypto": {
+			"host": "https://api.coinmarketcap.com/v2"
+		},
+		"stocks": {
 			"host": "https://www.alphavantage.co",
 			"key": ""
 		},
