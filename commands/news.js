@@ -63,7 +63,7 @@ console.log(url);
 			    		let source = article.source;
 			    		let link = article.url;
 			    		// message.reply(`\n📰 **${source.name}** (${article.title})\n${link}`);		
-			    		message.reply(`\n📰${link}`);		
+			    		message.reply(`\n📰 ${link}`);		
 			    	});
 
 			    	
