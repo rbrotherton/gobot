@@ -37,6 +37,7 @@ The bot will need the following permissions
 * `ping` - Classic ping. See if you & the bot can communicate.
 * `quickpoll` - Create a yes/no poll.
 * `quote` - Save/recall quotes form users.
+* `realmstatus` - Get the status of a World of Warcraft realm
 * `repo` - Outputs a link to the bot's source code.
 * `role` - Give yourself roles, or remove them.
 * `roll` - Roll an assortment of dice (e.g. 3d6+5)
@@ -99,6 +100,11 @@ The bot will need the following permissions
 			"host": "https://newsapi.org/v2",
 			"country": "us",
 			"language": "en"
+		},
+		"blizzard": {
+			"host": "https://us.api.battle.net/wow",
+			"key": "",
+			"secret": ""
 		}
 	}
 }
