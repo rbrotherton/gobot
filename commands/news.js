@@ -8,7 +8,7 @@ module.exports = {
     cooldown: 5,
     execute(message, args) {
 
-   		let limit = 1;
+   		let limit = 3;
    		let url = "";
 
    		// What did the user want to do?
@@ -16,12 +16,7 @@ module.exports = {
 
     		if(isNumber(args[0])){
 				limit = parseInt(args[0]);
-
-				if(limit > 3){
-					message.reply("Please use a number smaller than 4");
-					return;
-				}
-
+				if(limit > 10){limit = 10;}
 			}
     		url = `${conf.apis.news.host}/top-headlines?pageSize=${limit}&apiKey=${conf.apis.news.key}&country=${conf.apis.news.country}`;	
     	} else { // Search
@@ -53,8 +48,7 @@ console.log(url);
 			    	articles.forEach(function(article){
 			    		let source = article.source;
 			    		let link = article.url;
-			    		// message.reply(`\n📰 **${source.name}** (${article.title})\n${link}`);		
-			    		message.reply(`\n📰 ${link}`);		
+			    		message.reply(`\n📰 **${source.name}** ${article.title} (<${link}>)`);		
 			    	});
 
 			    	
