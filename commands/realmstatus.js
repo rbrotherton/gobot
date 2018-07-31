@@ -68,7 +68,7 @@ module.exports = {
 			    			status = "✅ Up"
 			    		}
 
-			    		if(args[args.length-1].toLowerCase() == "detail"){
+			    		if(args.length && args[args.length-1].toLowerCase() == "detail"){
 			    			message.reply(`🛡 **${name}**: ${status} ${queue}\n **Population:** ${population}\n **Battlegroup:** ${battlegroup} \n **Connected Realms:** ${connected} `);			
 			    		} else {
 			    			message.reply(`🛡 **${name}**: ${status} ${queue}`);		
