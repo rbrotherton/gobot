@@ -8,7 +8,12 @@ module.exports = {
     cooldown: 5,
     execute(message, args) {
 
-    	const realm = args[0].toLowerCase();
+    	let realm = args[0].toLowerCase();
+
+    	if(args.length > 1 && args[1].toLowerCase() != "detail"){
+    		realm += "-" + args[1].toLowerCase()
+    	}
+
     	const url = `${conf.apis.blizzard.host}/wow/realm/status?realms=${realm}&locale=un_US&apikey=${conf.apis.blizzard.key}`;
     
     	// Create request
