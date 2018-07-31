@@ -9,13 +9,15 @@ module.exports = {
     execute(message, args) {
 
     	let realm = args[0].toLowerCase();
-
-    	if(args.length > 1 && args[1].toLowerCase() != "detail"){
-    		args.shift();
+    	args.shift();
+    	if(args.length > 1){
     		args.forEach(function(arg){
-    			realm += `-${arg.toLowerCase()}`;
+    			if(arg.toLowerCase() != "detail"){
+    				realm += `-${arg.toLowerCase()}`;
+    			}
     		});
     	}
+    	console.log(args);
 
     	const url = `${conf.apis.blizzard.host}/wow/realm/status?realms=${realm}&locale=un_US&apikey=${conf.apis.blizzard.key}`;
     
@@ -67,7 +69,7 @@ module.exports = {
 			    			status = "✅ Up"
 			    		}
 
-			    		if(args.length > 1 && args[1].toLowerCase() == "detail"){
+			    		if(args[args.length-1].toLowerCase() == "detail"){
 			    			message.reply(`🛡 **${name}**: ${status} ${queue}\n **Population:** ${population}\n **Battlegroup:** ${battlegroup} \n **Connected Realms:** ${connected} `);			
 			    		} else {
 			    			message.reply(`🛡 **${name}**: ${status} ${queue}`);		
