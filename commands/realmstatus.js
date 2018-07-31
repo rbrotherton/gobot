@@ -8,6 +8,7 @@ module.exports = {
     cooldown: 5,
     execute(message, args) {
 
+    	// What realm do we want to look up?
     	let realm = args[0].toLowerCase();
     	args.shift();
     	if(args.length > 1){
@@ -17,14 +18,12 @@ module.exports = {
     			}
     		});
     	}
-    	console.log(args);
 
+    	// Define API endpoint & details
     	const url = `${conf.apis.blizzard.host}/wow/realm/status?realms=${realm}&locale=un_US&apikey=${conf.apis.blizzard.key}`;
     
-    	// Create request
-		var request = require('request');
-
 		// Configure the request
+		var request = require('request');
 		var options = {
 		    url: url,
 		    method: 'GET',
