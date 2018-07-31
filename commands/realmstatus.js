@@ -11,7 +11,10 @@ module.exports = {
     	let realm = args[0].toLowerCase();
 
     	if(args.length > 1 && args[1].toLowerCase() != "detail"){
-    		realm += "-" + args[1].toLowerCase()
+    		args.shift();
+    		args.forEach(function(arg){
+    			realm += `-${arg.toLowerCase()}`;
+    		});
     	}
 
     	const url = `${conf.apis.blizzard.host}/wow/realm/status?realms=${realm}&locale=un_US&apikey=${conf.apis.blizzard.key}`;
