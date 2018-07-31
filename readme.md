@@ -42,6 +42,7 @@ The bot will need the following permissions
 * `roll` - Roll an assortment of dice (e.g. 3d6+5)
 * `server` - Display server info
 * `stock` - Get a stock quote
+* `tictactoe` - Play a game of Tic Tac Toe
 * `topic` - Set the topic of the channel
 * `twitter` - Get the latest Tweet from a given Twitter user
 * `urban` - Lookup a word on UrbanDictionary.com
@@ -104,7 +105,7 @@ The bot will need the following permissions
 ```
 4. Create a cache.json file in the project root with the folowing structure:
 ```
-{"zips":{},"quotes":{}}
+{"zips":{},"quotes":[],"boards":{}}
 ```
 5. Create a cache_crypto.json file in the project root with the folowing structure:
 ```
