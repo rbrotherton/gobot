@@ -21,7 +21,7 @@ module.exports = {
     	}
 
     	// Does User have role?
-    	user_has_role = user.roles.find("name", role_name);
+    	user_has_role = user.roles.find(role => role.name.toLowerCase() === role_name.toLowerCase());
 
     	// Add or remove role
     	if(!user_has_role){
