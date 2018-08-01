@@ -3,7 +3,7 @@ module.exports = {
     name: 'role',
     description: 'Give yourself roles, or remove them.',
     args: true,
-    usage: '<role name> (CaSe SeNsItIvE!)',
+    usage: '<role name>',
     aliases: [],
     cooldown: 5,
     execute(message, args) {
@@ -14,7 +14,7 @@ module.exports = {
     	const bot = null;
 
     	// Find Role in guild
-    	let role = guild.roles.find("name", role_name);
+        let role = guild.roles.find(role => role.name.toLowerCase() === role_name.toLowerCase());
     	if(!role){
     		message.reply("I could not find that role.");
     		return;
