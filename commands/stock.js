@@ -9,7 +9,7 @@ module.exports = {
     cooldown: 1,
     execute(message, args) {
 
-    	getTicker(message, args[0]);
+    	getTicker(message, args[0].toUpperCase());
 
         // Get a Ticker value
         function getTicker(message, ticker_id) {
