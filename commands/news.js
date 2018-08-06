@@ -1,4 +1,5 @@
 const conf = require('../config.json');
+const Discord = require('discord.js');
 module.exports = {
     name: 'news',
     description: 'Fetch top world news headlines',
@@ -10,6 +11,7 @@ module.exports = {
 
    		let limit = 3;
    		let url = "";
+   		let embed = new Discord.RichEmbed();
 
    		// What did the user want to do?
     	if(args.length == 0 || isNumber(args[0])){ // Top news
@@ -19,14 +21,17 @@ module.exports = {
 				if(limit > 10){limit = 10;}
 			}
     		url = `${conf.apis.news.host}/top-headlines?pageSize=${limit}&apiKey=${conf.apis.news.key}&country=${conf.apis.news.country}`;	
+    		embed.setTitle(`Top ${limit} news articles in the ${conf.apis.news.country.toUpperCase()} `);
+
     	} else { // Search
 
 			let oldest_date = getOldestDate();
 			let query = args.join(" ");
 
 			url = `${conf.apis.news.host}/everything?q=${query}&pageSize=${limit}&language=${conf.apis.news.language}&from=${oldest_date}&sortBy=publishedAt&apiKey=${conf.apis.news.key}`;	
+			embed.setTitle(`Top ${limit} search results for '${query}' `);
     	}
-console.log(url);
+
     	// Create request
 		var request = require('request');
 
@@ -45,11 +50,22 @@ console.log(url);
 		    		let obj 	 = JSON.parse(body);
 			    	let articles = obj.articles;
 
+			    	// Build embed message string
+			    	let desc = ``;
+			    	desc += articles.map(function(article){
+			    		let source = article.source;
+			    		let link = article.url;
+			    		return `\n **${source.name}**: [${article.title}](<${link}>)`;
+			    	});
+			    	embed.setDescription(desc);
+			    	message.channel.send("", embed);
+
+			    	/* pre-embed method
 			    	articles.forEach(function(article){
 			    		let source = article.source;
 			    		let link = article.url;
 			    		message.reply(`\n📰 **${source.name}** ${article.title} (<${link}>)`);		
-			    	});
+			    	}); */
 
 			    	
 		    	}
