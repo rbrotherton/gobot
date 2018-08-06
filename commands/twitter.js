@@ -55,9 +55,9 @@ module.exports = {
 		    		// let tweet_text  = tweet.text; // Non-extended
 		    		let tweet_text  = tweet.full_text; // Extended
 		    		let tweet_link  = `https://twitter.com/${screen_name}/status/${tweet.id_str}`;
-		    		let response = `${real_name} (@${screen_name}): ${tweet_text}`;
+			    	message.channel.send(tweet_link);
 
-		    		message.reply(`🐦 ${response}`);  
+		    		
 		    	});
 		    	
 

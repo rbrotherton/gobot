@@ -1,4 +1,5 @@
 const conf = require('../config.json');
+const Discord = require('discord.js');
 module.exports = {
     name: 'google',
     description: 'Fetch the first result of a Google query',
@@ -33,9 +34,19 @@ module.exports = {
 			    	let link 	 = item.link;
 			    	let snippet	 = item.snippet;
 
-			    	message.reply(`🤖 **${title}** (${link})\n${snippet}`);	
+			    	let embed = new Discord.RichEmbed({
+			    		"title": title,
+			    		"description": snippet,
+			    		"url": link,
+			    		"color": 6037821,
+			    		// "author": {"name": "Google", "url": link},
+			    	});
+
+			    	// message.reply(`🤖 ${embed}`);	
+			    	message.channel.send("", embed);
 		    	}
 		    	catch(error) {
+		    		console.log(error);
 		    		message.reply("There was an error parsing the response.");	
 		    	}
 

@@ -1,4 +1,5 @@
 const conf = require('../config.json');
+const Discord = require('discord.js');
 module.exports = {
     name: 'define',
     description: 'Gets the definition of an English word',
@@ -41,7 +42,13 @@ module.exports = {
 			    	let entry 	 = lexEntry.entries[0];
 			    	let def 	 = entry.senses[0].definitions[0];
 			    	// let notes 	 = entry.senses[0].notes[0];
-			    	message.reply(`📘 **${word}** (${type}): ${def}`);	
+			    	// message.reply(`📘 **${word}** (${type}): ${def}`);
+			    	let embed = new Discord.RichEmbed({
+			    		"title": `${word} (${type})`,
+			    		"description": def
+			    	});	
+			    	message.channel.send("Oxford Dictionary says", embed);
+
 		    	}
 		    	catch(error) {
 		    		message.reply("There was an error parsing the response.");	
