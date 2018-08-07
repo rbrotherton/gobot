@@ -50,7 +50,15 @@ module.exports = {
 	            } else {
 	            	// get existing user quotes
 	                obj = JSON.parse(data);
-	                let user_id = message.mentions.users.first().id;
+	                let target_user = message.mentions.users.first();
+
+	                // Don't store quotes for bots
+	                if(target_user.bot){
+	                	message.reply("I can't store quotes for bots!");
+	                	return;
+	                }
+
+	                let user_id = target_user.id;
 	                let guild_id = message.guild.id;
 	                let quotes = obj.quotes;
 	                let guild_quotes = quotes[guild_id];
