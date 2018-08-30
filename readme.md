@@ -42,6 +42,7 @@ The bot will need the following permissions
 * `role` - Give yourself roles, or remove them.
 * `roll` - Roll an assortment of dice (e.g. 3d6+5)
 * `server` - Display server info
+* `spoiler` - Embed a spoiler in a channel
 * `stock` - Get a stock quote
 * `tictactoe` - Play a game of Tic Tac Toe
 * `topic` - Set the topic of the channel
