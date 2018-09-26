@@ -33,6 +33,7 @@ The bot will need the following permissions
 * `define` - Look up a word in the Oxford dictionary
 * `google` - Return Google search results for a query
 * `help` - display help with my commands
+* `holidays` - Find holidays celebrated on a given date. Default today.
 * `news` - get top world news or search keyword news articles.
 * `ping` - Classic ping. See if you & the bot can communicate.
 * `quickpoll` - Create a yes/no poll.
@@ -106,6 +107,9 @@ The bot will need the following permissions
 			"host": "https://us.api.battle.net/wow",
 			"key": "",
 			"secret": ""
+		},
+		"holidays": {
+			"host": "https://www.checkiday.com/api/3"
 		}
 	}
 }
