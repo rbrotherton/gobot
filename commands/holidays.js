@@ -56,7 +56,7 @@ module.exports = {
                             var url  = holiday.url;
                             var name = holiday.name;
                             // embed.addField(name, url);
-                            markup += name + "\n";
+                            markup += `[${name}](<${url}>)\n`;
                         });
 
                         // message.reply(`🤖 ${embed}`);	
