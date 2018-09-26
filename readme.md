@@ -132,5 +132,5 @@ This project is licensed under the MIT License
 
 ## Atribution
 
-Thanks to [NewsAPI.org](https://newsapi.org) for providing a free news API!
-
+* Thanks to [NewsAPI.org](https://newsapi.org) for providing a free news API!
+* Thanks to [CheckIDay.com](https://checkiday.com) for providing a free holidays API!
