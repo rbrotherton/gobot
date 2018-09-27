@@ -130,7 +130,7 @@ The bot will need the following permissions
 
 This project is licensed under the MIT License
 
-## Atribution
+## Attribution
 
 * Thanks to [NewsAPI.org](https://newsapi.org) for providing a free news API!
 * Thanks to [CheckIDay.com](https://checkiday.com) for providing a free holidays API!
