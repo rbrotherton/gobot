@@ -33,12 +33,13 @@ module.exports = {
 			    	let list 	 = obj.list;
 			    	let def 	 = list[0].definition;
 			    	let ups 	 = list[0].thumbs_up;
-			    	let downs 	 = list[0].thumbs_down;
+					let downs 	 = list[0].thumbs_down;
+					let link	 = list[0].permalink;
 			    	let rating   = Math.round((ups / (ups + downs) * 100));
 			    	let up 		 = "👍";
 
 					rating = `(${rating}% ${up})`;
-			    	message.reply(`📕 **${word}** ${rating}\n${def}`);	
+			    	message.reply(`📕 **${word}** ${rating} \n <${link}> \n${def}`);	
 		    	}
 		    	catch(error) {
 		    		message.reply("There was an error parsing the response.");	
