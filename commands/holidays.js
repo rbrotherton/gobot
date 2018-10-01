@@ -55,8 +55,11 @@ module.exports = {
                         holidays.forEach(holiday => {
                             var url  = holiday.url;
                             var name = holiday.name;
-                            // embed.addField(name, url);
-                            markup += `[${name}](<${url}>)\n`;
+                            var new_line = `[${name}](<${url}>)\n`
+                            
+                            if(markup.length + new_line.length <= 2048){
+                                markup += `[${name}](<${url}>)\n`;
+                            }
                         });
 
                         // message.reply(`🤖 ${embed}`);	
