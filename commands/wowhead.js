@@ -11,7 +11,7 @@ module.exports = {
     	// https://www.wowhead.com/search?q=bloodfang
 
     	let word = args.join(' ');
-    	let url = `https://www.wowhead.com/search?q=${word}`;
+    	let url = encodeURI(`https://www.wowhead.com/search?q=${word}`);
     	message.reply(`${url}`);	
 
     },
