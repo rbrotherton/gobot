@@ -1,4 +1,5 @@
 const conf = require('../config.json');
+const Discord = require('discord.js');
 module.exports = {
     name: 'wowhead',
     description: 'Perform a search on wowhead.com',
@@ -7,12 +8,8 @@ module.exports = {
     aliases: ['wow'],
     cooldown: 3,
     execute(message, args) {
-    	
-    	// https://www.wowhead.com/search?q=bloodfang
-
-    	let word = args.join(' ');
-    	let url = encodeURI(`https://www.wowhead.com/search?q=${word}`);
+        let query = args.join(' ');
+    	let url = encodeURI(`https://www.wowhead.com/search?q=${query}`);
     	message.reply(`${url}`);	
-
     },
 };
