@@ -5,7 +5,7 @@ module.exports = {
     description: `WoW - Get current week's mythic+ affixes`,
     args: false,
     usage: '',
-    aliases: ['aff'],
+    aliases: ['aff','affix'],
     cooldown: 5,
     execute(message, args) {
         
