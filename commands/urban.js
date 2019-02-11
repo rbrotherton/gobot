@@ -39,8 +39,8 @@ module.exports = {
 					let up 		 = "👍";
 					
 					// Filter definition
-					def = def.replace("[", "");
-					def = def.replace("]", "");
+					def = def.replace(/\[/g, "");
+					def = def.replace(/\]/g, "");
 
 					rating = `(${rating}% ${up})`;
 			    	message.reply(`📕 **${word}** ${rating} \n <${link}> \n${def}`);	
