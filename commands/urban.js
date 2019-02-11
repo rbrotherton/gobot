@@ -36,7 +36,11 @@ module.exports = {
 					let downs 	 = list[0].thumbs_down;
 					let link	 = list[0].permalink;
 			    	let rating   = Math.round((ups / (ups + downs) * 100));
-			    	let up 		 = "👍";
+					let up 		 = "👍";
+					
+					// Filter definition
+					def = def.replace("[", "");
+					def = def.replace("]", "");
 
 					rating = `(${rating}% ${up})`;
 			    	message.reply(`📕 **${word}** ${rating} \n <${link}> \n${def}`);	
