@@ -6,7 +6,7 @@ module.exports = {
     description: 'Creates a quick yes/no poll',
     args: true,
     usage: '<question>',
-    aliases: ['qp'],
+    aliases: ['qp', 'poll'],
     cooldown: 3,
     execute(message, args) {
 
