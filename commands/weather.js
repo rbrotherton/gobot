@@ -75,7 +75,7 @@ module.exports = {
 
                         // Format data
                         let cnd        = current.summary;
-                        let humid      = current.humidity * 100;
+                        let humid      = Math.round(current.humidity * 100);
                         let temp_f     = Math.round(current.temperature);
                         let temp_c     = Math.round((temp_f - 32) * .55555555);
                         let feels_f    = Math.round(current.apparentTemperature);
