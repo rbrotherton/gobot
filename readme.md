@@ -76,7 +76,7 @@ The bot will need the following permissions
 			"language": "en"
 		},
 		"weather": {
-			"host": "api.wunderground.com/api",
+			"host": "api.darksky.net",
 			"api_key": ""
 		},
 		"google": {
