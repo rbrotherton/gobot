@@ -42,8 +42,8 @@ module.exports = {
                 let zips = obj.zips;
 
                 if(zips.hasOwnProperty(user_id)){
-                    let zip = zips[user_id];
-                    getWeather(zip.lat, zip.lon);
+                    let place = zips[user_id];
+                    getWeather(place);
                 } else {
                     message.reply("I don't have a saved location for you. Please use .ws <zip> to save a zipcode, or .w <zip> to get the weather.");
                 }
@@ -55,10 +55,22 @@ module.exports = {
          * Function to retrieve weather for a given input
          * @param {*} url 
          */
-        function getWeather(lat, lon) {
+        function getWeather(place) {
 
             let api_key = conf.apis.weather.api_key;
-            let url = `${conf.apis.weather.host}/forecast/${conf.apis.weather.api_key}/${lat},${lon}?exclude=minutely,hourly,daily,alerts,flags`;
+            let url = `${conf.apis.weather.host}/forecast/${conf.apis.weather.api_key}/${place.lat},${place.lon}?exclude=minutely,hourly,daily,alerts,flags`;
+
+            // Do we have a label for this location to show to the user?
+            let place_label = "";
+            console.log(place);
+            if(place.hasOwnProperty('address')){
+                let address = place.address;
+                if(address.hasOwnProperty('city') && address.hasOwnProperty('state')){
+                    place_label = `**${address.city}, ${address.state}** `;
+                } else if(address.hasOwnProperty('postcode')) {
+                    place_label = `**${address.postcode}** `;
+                }
+            }
 
             // Configure the request
             var request = require('request');
@@ -69,12 +81,13 @@ module.exports = {
                 if (!error && response.statusCode == 200) {
 
                     try {
-                        console.log(body);
+
                         let obj = JSON.parse(body);
                         let current = obj.currently
 
                         // Format data
                         let cnd        = current.summary;
+                        let icon       = current.icon;
                         let humid      = Math.round(current.humidity * 100);
                         let temp_f     = Math.round(current.temperature);
                         let temp_c     = Math.round((temp_f - 32) * .55555555);
@@ -92,10 +105,10 @@ module.exports = {
                         }
                         
                         // Get a condition icon
-                        let cnd_icon = getIcon(cnd);
+                        icon = getIcon(icon);
 
                         // Create response
-                        message.reply(`${cur_temp} and feels like ${feels_like} | Humidity: ${humid}% | ${cnd_icon} ${cnd}`); 
+                        message.reply(`${place_label}${cnd} and ${cur_temp} | Feels like ${feels_like} | Humidity: ${humid}% | Today: ${icon} `); 
                     }
                     catch(error) {
                         console.log(error);
@@ -134,9 +147,7 @@ module.exports = {
             request(options, function (error, response, body) {
                 if (!error && response.statusCode == 200) {
                     let place = JSON.parse(body)[0];
-                    let lat   = place.lat;
-                    let lon   = place.lon;
-                    getWeather(lat, lon);
+                    getWeather(place);
                 } else {
                     console.log(body);
                     message.reply("I failed to find coordinates for that locaion :(");
@@ -176,6 +187,7 @@ module.exports = {
                 {"name": 'rain',    "icon": icon_cloud_rain},
                 {"name": 'spray',   "icon": icon_cloud_rain},
                 {"name": 'snow',    "icon": icon_snowing},
+                {"name": 'sleet',   "icon": icon_snowing},
                 {"name": 'ice',     "icon": icon_snowflake},
                 {"name": 'hail',    "icon": icon_snowflake},
                 {"name": 'mist',    "icon": icon_fog},
@@ -190,7 +202,8 @@ module.exports = {
                 {"name": 'clear',   "icon": icon_sun},
                 {"name": 'sunny',   "icon": icon_sun},
                 {"name": 'cloud',   "icon": icon_cloudy},
-                {"name": 'cloudy',   "icon": icon_cloudy}
+                {"name": 'cloudy',  "icon": icon_cloudy},
+                {"name": 'partly-cloudy', "icon": icon_light_clouds},
             ];
 
             // For each condition keyword, see if condition contains it

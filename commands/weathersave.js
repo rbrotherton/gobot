@@ -45,6 +45,7 @@ module.exports = {
 
         // Configure the request
         let url = `https://nominatim.openstreetmap.org/search?q=${loc_str}&format=json&addressdetails=1`;
+        console.log(url);
         var request = require('request');
         var options = {url: url, method: 'GET', headers: {"User-Agent": "GoBot - Discord Bot"}}
 
@@ -52,8 +53,6 @@ module.exports = {
         request(options, function (error, response, body) {
             if (!error && response.statusCode == 200) {
                 let place = JSON.parse(body)[0];
-                let lat   = place.lat;
-                let lon   = place.lon;
 
                 // Cache results
                 fs.readFile('cache.json', 'utf8', function readFileCallback(err, data){
@@ -64,7 +63,7 @@ module.exports = {
                         obj = JSON.parse(data);
                         let user_id = message.author.id;
                         let zips = obj.zips;
-                        zips[user_id] = {"lat": lat, "lon": lon};
+                        zips[user_id] = {"address": place.address, "lat": place.lat, "lon": place.lon};
                         json = JSON.stringify(obj);
                         fs.writeFile('cache.json', json, 'utf8', function(){
                             message.reply("I've saved your location for future use.");
