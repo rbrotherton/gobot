@@ -62,7 +62,7 @@ module.exports = {
 
             // Do we have a label for this location to show to the user?
             let place_label = "";
-            console.log(place);
+            
             if(place.hasOwnProperty('address')){
                 let address = place.address;
                 if(address.hasOwnProperty('city') && address.hasOwnProperty('state')){
