@@ -5,7 +5,7 @@ module.exports = {
     name: 'weather',
     description: 'Gets current weather for a given zip code.',
     args: false,
-    usage: '<zipcode> or <city>, <state>',
+    usage: '<zipcode> or <city> <state>',
     aliases: ['w'],
     cooldown: 3,
     execute(message, args) {
@@ -45,7 +45,7 @@ module.exports = {
                     let place = zips[user_id];
                     getWeather(place);
                 } else {
-                    message.reply("I don't have a saved location for you. Please use .ws <zip> to save a zipcode, or .w <zip> to get the weather.");
+                    message.reply("I don't have a saved location for you. Please use `.ws <zip>` or `.ws city state` to save a location first.");
                 }
             }
         });
@@ -58,7 +58,9 @@ module.exports = {
         function getWeather(place) {
 
             let api_key = conf.apis.weather.api_key;
-            let url = `${conf.apis.weather.host}/forecast/${conf.apis.weather.api_key}/${place.lat},${place.lon}?exclude=minutely,hourly,daily,alerts,flags`;
+            let host    = conf.apis.weather.host;
+            let exclude = "minutely,hourly,daily,flags";
+            let url     = `${host}/forecast/${api_key}/${place.lat},${place.lon}?exclude=${exclude}`;
 
             // Do we have a label for this location to show to the user?
             let place_label = "";

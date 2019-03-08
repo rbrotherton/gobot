@@ -3,7 +3,7 @@ fs = require('fs');
 
 module.exports = {
     name: 'weathersave',
-    description: 'Saves a user\'s zipcode for ease of use with weather command' ,
+    description: 'Saves a user\'s location for ease of use with weather command' ,
     args: true,
     usage: '<zipcode>',
     aliases: ['ws'],
