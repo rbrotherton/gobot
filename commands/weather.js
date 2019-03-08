@@ -109,8 +109,17 @@ module.exports = {
                         // Get a condition icon
                         icon = getIcon(icon);
 
-                        // Create response
+                        // Send response
                         message.reply(`${place_label}${cnd} and ${cur_temp} | Feels like ${feels_like} | Humidity: ${humid}% | Today: ${icon} `); 
+                        
+                        // Have any alerts to notify the user of?
+                        if(obj.hasOwnProperty("alerts") && obj.alerts.length > 0){
+                            let alert_output = obj.alerts.map(alert => {
+                                return `**ALERT:** ${alert.title} (<${alert.uri}>) `;
+                            });
+                            message.reply(`${alert_output.join("\n")}`); 
+                        }
+
                     }
                     catch(error) {
                         console.log(error);
