@@ -115,6 +115,7 @@ module.exports = {
                         // Have any alerts to notify the user of?
                         if(obj.hasOwnProperty("alerts") && obj.alerts.length > 0){
                             let alert_output = obj.alerts.map(alert => {
+                                console.log(alert.title);
                                 return `**ALERT:** ${alert.title} (<${alert.uri}>) `;
                             });
                             message.reply(`${alert_output.join("\n")}`); 

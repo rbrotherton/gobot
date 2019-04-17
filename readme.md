@@ -70,10 +70,10 @@ The bot will need the following permissions
 	"repo": "https://github.com/rbrotherton/gobot",
 	"apis": {
 		"define" : {
-			"host": "https://od-api.oxforddictionaries.com/api/v1",
+			"host": "https://od-api.oxforddictionaries.com/api/v2",
 			"app_id": "",
 			"app_key": "",
-			"language": "en"
+			"language": "en-us"
 		},
 		"weather": {
 			"host": "api.darksky.net",

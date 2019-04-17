@@ -8,7 +8,7 @@ module.exports = {
     args: true,
     execute(message, args) {
     	
-    	// https://od-api.oxforddictionaries.com/api/v1/entries/en/dog
+    	// https://od-api.oxforddictionaries.com/api/v2/entries/en/dog
 
     	let word = args[0];
     	let url = `${conf.apis.define.host}/entries/${conf.apis.define.language}/${word.toLowerCase()}`;
@@ -28,7 +28,6 @@ module.exports = {
 		    url: url,
 		    method: 'GET',
 		    headers: headers,
-		    // qs: {'key1': 'xxx', 'key2': 'yyy'}
 		}
 
 		// Start the request
@@ -36,22 +35,22 @@ module.exports = {
 		    if (!error && response.statusCode == 200) {
 
 		    	try {
-		    		let obj = JSON.parse(body);
+					let obj = JSON.parse(body);
 			    	let lexEntry = obj.results[0].lexicalEntries[0];
 			    	let type 	 = lexEntry.lexicalCategory;
 			    	let entry 	 = lexEntry.entries[0];
 			    	let def 	 = entry.senses[0].definitions[0];
-			    	// let notes 	 = entry.senses[0].notes[0];
-			    	// message.reply(`📘 **${word}** (${type}): ${def}`);
 			    	let embed = new Discord.RichEmbed({
 			    		"title": `${word} (${type})`,
 			    		"description": def
-			    	});	
+					});	
+
 			    	message.channel.send("Oxford Dictionary says", embed);
 
 		    	}
 		    	catch(error) {
-		    		message.reply("There was an error parsing the response.");	
+					message.reply("There was an error parsing the response.");
+					console.log(error);
 		    	}
 
 		        
