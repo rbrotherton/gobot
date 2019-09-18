@@ -36,8 +36,8 @@ module.exports = {
 
 		    	try {
 					let obj = JSON.parse(body);
-			    	let lexEntry = obj.results[0].lexicalEntries[0];
-			    	let type 	 = lexEntry.lexicalCategory;
+					let lexEntry = obj.results[0].lexicalEntries[0];
+			    	let type 	 = lexEntry.lexicalCategory.text;
 			    	let entry 	 = lexEntry.entries[0];
 			    	let def 	 = entry.senses[0].definitions[0];
 			    	let embed = new Discord.RichEmbed({
