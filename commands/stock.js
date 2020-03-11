@@ -98,14 +98,17 @@ module.exports = {
                     if(first_price > second_price) {
                         dir = "+";
                         color = 1222182; // Green
-                        change = (((first_price - second_price) / second_price) * 100).toFixed(2);
+                        change = ((first_price - second_price) / second_price) * 100;
                     } else {
                         color = 13897487; // Red
                         dir = "-";
-                        change = (((second_price - first_price) / second_price) * 100).toFixed(2);
+                        change = ((second_price - first_price) / second_price) * 100;
                     }
                     
                     // Format output
+                    let today_value    = first_price.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+                    let previous_value = second_price.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+                    let change_value   = change.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
                     let embed = new Discord.RichEmbed({
                         "title": `💰 ${chunk} stock quote for ${ticker_id}`,
                         "url": `https://www.google.com/search?q=stock%20quote%20${ticker_id}`,
@@ -114,12 +117,12 @@ module.exports = {
                         "fields": [
                             {
                                 "name": "Latest Today",
-                                "value": `$${first_price} (${dir}${change}%)`,
+                                "value": `$${today_value} (${dir}${change_value}%)`,
                                 "inline": true
                             },
                             {
                                 "name": previous,
-                                "value": `$${second_price}`,
+                                "value": `$${previous_value}`,
                                 "inline": true
                             }
                         ]
