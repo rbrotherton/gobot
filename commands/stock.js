@@ -88,8 +88,11 @@ module.exports = {
                     let meta   = obj['Meta Data'];
                     let series = obj[chunk_index];
 
-                    let first_price  = parseFloat(series[first_stamp]["4. close"]);
-                    let second_price = parseFloat(series[second_stamp]["4. close"]);
+                    let first_day_values = series[Object.keys(series)[0]];
+                    let second_day_values = series[Object.keys(series)[1]];
+                    console.log(first_day_values);
+                    let first_price  = parseFloat(first_day_values["4. close"]);
+                    let second_price = parseFloat(second_day_values["4. close"]);
 
                     // Get percent change
                     var change;
