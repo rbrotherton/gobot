@@ -11,14 +11,14 @@ module.exports = {
 
         // Define period for time series change data
         let period = "D";
-        /*if(typeof(args[1]) != "undefined") {
+        if(typeof(args[1]) != "undefined") {
             let inp_period = args[1].toUpperCase();
             console.log(inp_period);
             if(["D", "W", "M"].includes(inp_period)) {
-                period = inp_period;
+                period = inp_period.toUpperCase();
                 console.log("inp set");
             }
-        }*/
+        }
 
         // Define variables
         let ticker_id = args[0].toUpperCase();
@@ -43,7 +43,7 @@ module.exports = {
             case "W": 
                 chunk = "Weekly";
                 chunk_index = "Weekly Time Series";
-                previous = "End of Last Week";
+                previous = "Last Week";
                 api = "TIME_SERIES_WEEKLY";
                 second_day = new Date(Date.now() - (86400000 * 7)); // TODO: Needs to be previous friday
                 break;
@@ -51,9 +51,10 @@ module.exports = {
             case "M": 
                 chunk = "Monthly";
                 chunk_index = "Monthly Time Series";
-                previous = "End of Last Month";
+                previous = "Last Month";
                 api = "TIME_SERIES_MONTHLY";
                 second_day = new Date(Date.now() - (86400000 * 30)); // TODO: Needs to be last day of previous month
+                break;
 
             default:
                 message.reply("Invalid period type. Please use 'm', 'd', or 'y'");
@@ -90,7 +91,7 @@ module.exports = {
 
                     let first_day_values = series[Object.keys(series)[0]];
                     let second_day_values = series[Object.keys(series)[1]];
-                    console.log(first_day_values);
+                    
                     let first_price  = parseFloat(first_day_values["4. close"]);
                     let second_price = parseFloat(second_day_values["4. close"]);
 
