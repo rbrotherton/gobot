@@ -130,7 +130,7 @@ module.exports = {
                             // message.reply(msg, embed); 
                             message.channel.send(msg, embed);
                         } else {
-                            message.reply(msg); 
+                            message.channel.send(msg); 
                         }
 
                     }
