@@ -1,4 +1,5 @@
 const conf = require('../config.json');
+const Discord = require('discord.js');
 fs = require('fs');
 
 module.exports = {
@@ -85,9 +86,10 @@ module.exports = {
                     try {
 
                         let obj = JSON.parse(body);
-                        let current = obj.currently
+                        // obj = JSON.parse(testJson());
 
                         // Format data
+                        let current    = obj.currently
                         let cnd        = current.summary;
                         let icon       = current.icon;
                         let humid      = Math.round(current.humidity * 100);
@@ -108,17 +110,27 @@ module.exports = {
                         
                         // Get a condition icon
                         icon = getIcon(icon);
-
-                        // Send response
-                        message.reply(`${place_label}${cnd} and ${cur_temp} | Feels like ${feels_like} | Humidity: ${humid}% | Today: ${icon} `); 
+                        let msg = ``;
+                        msg += `<@${message.author.id}> - `;
+                        msg += `${place_label}${cnd} and ${cur_temp} | Feels like ${feels_like} | Humidity: ${humid}% | Today: ${icon} `;
                         
                         // Have any alerts to notify the user of?
                         if(obj.hasOwnProperty("alerts") && obj.alerts.length > 0){
-                            let alert_output = obj.alerts.map(alert => {
-                                console.log(alert.title);
-                                return `**ALERT:** ${alert.title} (<${alert.uri}>) `;
-                            });
-                            message.reply(`${alert_output.join("\n")}`); 
+                            let alert_text = obj.alerts.map(alert => {
+                                return `[ALERT] [${alert.title}](${alert.uri})\n`;
+                            }).join('');
+                            
+                            let embed = new Discord.RichEmbed({
+                                // "title": `⚠️ Alert(s) for you`,
+                                "color": 13897487,  // red
+                                "description": alert_text,
+                                // "footer": {"text": "Source: DarkSky API"}                                
+                            }); 
+
+                            // message.reply(msg, embed); 
+                            message.channel.send(msg, embed);
+                        } else {
+                            message.reply(msg); 
                         }
 
                     }
