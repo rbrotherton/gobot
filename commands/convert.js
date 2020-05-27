@@ -55,7 +55,7 @@ module.exports = {
             message.reply(msg);
         } catch(error) {
             console.log(error);
-            message.reply(`Error: ${error}`);	
+            message.reply(`${error}`);	
         }
 
         return;
