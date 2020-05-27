@@ -31,6 +31,7 @@ The bot will need the following permissions
 * `affixes` - WoW - Get current week's mythic+ affixes
 * `armory` - WoW - Get armory profile link for a given raelm/character
 * `coinflip` - Flip a coin
+* `convert` - Convert a quantity from one unit to another (e.g. 1 lb to kg)
 * `crypto` - Get a crypto currency quote, or several.
 * `define` - Look up a word in the Oxford dictionary
 * `google` - Return Google search results for a query
