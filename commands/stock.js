@@ -6,74 +6,18 @@ module.exports = {
     args: true,
     usage: '<ticker>',
     aliases: ['s'],
-    cooldown: 1,
+    cooldown: 1, // Free API key has a limit of 60 requests per minute
     execute(message, args) {
-
-        // Define period for time series change data
-        let period = "D";
-        if(typeof(args[1]) != "undefined") {
-            let inp_period = args[1].toUpperCase();
-            console.log(inp_period);
-            if(["D", "W", "M"].includes(inp_period)) {
-                period = inp_period.toUpperCase();
-                console.log("inp set");
-            }
-        }
 
         // Define variables
         let ticker_id = args[0].toUpperCase();
-        let chunk        = "";
-        let chunk_index  = "";
-        let previous     = "";
-        let api          = "";
-        let first_day    = new Date();
-        let second_day   = "";
-        let first_stamp  = "";
-        let second_stamp = "";
-            
-        switch(period) {
-            case "D": 
-                second_day = new Date(Date.now() - 86400000);
-                chunk = "Daily";
-                previous = "Yesterday";
-                chunk_index = "Time Series (Daily)";
-                api = "TIME_SERIES_DAILY";
-                break;
-
-            case "W": 
-                chunk = "Weekly";
-                chunk_index = "Weekly Time Series";
-                previous = "Last Week";
-                api = "TIME_SERIES_WEEKLY";
-                second_day = new Date(Date.now() - (86400000 * 7)); // TODO: Needs to be previous friday
-                break;
-
-            case "M": 
-                chunk = "Monthly";
-                chunk_index = "Monthly Time Series";
-                previous = "Last Month";
-                api = "TIME_SERIES_MONTHLY";
-                second_day = new Date(Date.now() - (86400000 * 30)); // TODO: Needs to be last day of previous month
-                break;
-
-            default:
-                message.reply("Invalid period type. Please use 'm', 'd', or 'y'");
-                throw new Error();
-        }
-
-        // Define time stamps we want to see from the time series data
-        let m = "";
-        m = first_day.getMonth()+1;
-        m = (m < 10 ? `0${m}` : m);
-        first_stamp  = `${first_day.getFullYear()}-${m}-${first_day.getDate()}`;
-        m = second_day.getMonth()+1;
-        m = (m < 10 ? `0${m}` : m);
-        second_stamp = `${second_day.getFullYear()}-${m}-${second_day.getDate()}`;
 
         // Configure the request
+        var url = `${conf.apis.stocks.host}/quote?symbol=${ticker_id}&token=${conf.apis.stocks.key}`;
+        console.log(url);
         var request = require('request');
         var options = {
-            url: `${conf.apis.stocks.host}/query?function=${api}&symbol=${ticker_id}&apikey=${conf.apis.stocks.key}`,
+            url: url,
             method: 'GET',
             headers: {},
         }
@@ -85,15 +29,12 @@ module.exports = {
                 try {
 
                     // Get data from response
-                    let obj    = JSON.parse(body);
-                    let meta   = obj['Meta Data'];
-                    let series = obj[chunk_index];
-
-                    let first_day_values = series[Object.keys(series)[0]];
-                    let second_day_values = series[Object.keys(series)[1]];
+                    let obj      = JSON.parse(body);
+                    let current  = obj.c;
+                    let previous = obj.pc;
                     
-                    let first_price  = parseFloat(first_day_values["4. close"]);
-                    let second_price = parseFloat(second_day_values["4. close"]);
+                    let first_price  = parseFloat(current);
+                    let second_price = parseFloat(previous);
 
                     // Get percent change
                     var change;
@@ -114,26 +55,28 @@ module.exports = {
                     let previous_value = second_price.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
                     let change_value   = change.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
                     let embed = new Discord.RichEmbed({
-                        "title": `💰 ${chunk} stock quote for ${ticker_id}`,
+                        "title": `💰 Latest stock quote for ${ticker_id}`,
                         "url": `https://www.google.com/search?q=stock%20quote%20${ticker_id}`,
                         "color": color, 
-                        "footer": {"text": "Source: AlphaVantage.co API"},
+                        "footer": {"text": "Source: FinnHub.io API"},
                         "fields": [
                             {
                                 "name": "Latest Today",
-                                "value": `$${today_value} (${dir}${change_value}%)`,
+                                "value": `$${today_value.toString()} (${dir}${change_value.toString()}%)`,
                                 "inline": true
                             },
                             {
-                                "name": previous,
-                                "value": `$${previous_value}`,
+                                "name": "Previous Close",
+                                "value": `$${previous_value.toString()}`,
                                 "inline": true
                             }
                         ]
                     }); 
             
-                    // message.reply(`💰 **${ticker_id.toUpperCase()}**: \$${close_price}`); 
+                    message.reply(`💰 **${ticker_id.toUpperCase()}**: \$${today_value}`); 
                     message.channel.send("", embed);
+                    // message.channel.send(`Today: $${today_value} (${dir}${change_value}%)`);
+                    // message.channel.send(`Previous: $${previous_value}`);
                 }
                 catch(error) {
                     console.log(error);
