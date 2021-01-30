@@ -72,9 +72,14 @@ module.exports = {
                             }
                         ]
                     }); 
-            
-                    message.reply(`💰 **${ticker_id.toUpperCase()}**: \$${today_value}`); 
-                    message.channel.send("", embed);
+
+                    if(today_value == 0) {
+                        message.reply(`The API doesn't seem to have recent data for ${ticker_id}`);
+                    } else {
+                        // message.reply(`💰 **${ticker_id.toUpperCase()}**: \$${today_value}`); 
+                        message.channel.send("", embed);
+                    }
+    
                     // message.channel.send(`Today: $${today_value} (${dir}${change_value}%)`);
                     // message.channel.send(`Previous: $${previous_value}`);
                 }
