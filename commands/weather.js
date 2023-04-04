@@ -105,7 +105,19 @@ module.exports = {
                         msg += `<@${message.author.id}> - `;
                         msg += `Weather for ${location}${state}${country}: ${cnd} and ${cur_temp} | Feels like ${feels_like} | Humidity: ${humid}% | Today: ${icon} `;
                         
-                        message.channel.send(msg);
+                        // Check for weather alerts
+                        getWeatherAlerts(location, function(alerts) {
+                            if (alerts) {
+                                let embed = new Discord.RichEmbed({
+                                    "color": 13897487,  // red
+                                    "description": alerts,                              
+                                }); 
+
+                                message.channel.send(msg, embed);
+                            } else {
+                                message.channel.send(msg);
+                            }
+                        });
 
                     }
                     catch(error) {
@@ -117,6 +129,37 @@ module.exports = {
                     // TODO Better errors
                     console.log(body);
                     message.reply("There was an error fetching the weather.");
+                }
+            });
+        }
+
+        // Get weather alerts for a given location
+        function getWeatherAlerts(location, callback) {
+            let api_key = conf.apis.weather.api_key;
+            let host = "https://api.openweathermap.org/data/2.5/onecall";
+            let lat = obj.coord.lat;
+            let lon = obj.coord.lon;
+            let url = `${host}?lat=${lat}&lon=${lon}&appid=${api_key}`;
+
+            // Configure the request
+            var request = require('request');
+            var options = {url: url, method: 'GET', headers: {"User-Agent": "GoBot - Discord Bot"}};
+
+            // Start the request
+            request(options, function (error, response, body) {
+                if (!error && response.statusCode == 200) {
+                    let obj = JSON.parse(body);
+                    if (obj.hasOwnProperty("alerts") && obj.alerts.length > 0) {
+                        let alert_text = obj.alerts.map(alert => {
+                            return `[ALERT] [${alert.event}](${alert.sender_name})\n`;
+                        }).join('');
+
+                        callback(alert_text);
+                    } else {
+                        callback(null);
+                    }
+                } else {
+                    callback(null);
                 }
             });
         }
